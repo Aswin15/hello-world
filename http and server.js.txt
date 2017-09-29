@@ -1,0 +1,41 @@
+in node side
+--------------------------------
+github/jithin971
+------------------------------------
+----------------------------
+ let path =['/employee/employeedetail',empid];
+ 
+ this.router.navigate(path);
+
+------------------------------
+To find an element in an array 
+-------------------------------------
+ this.employeedetails1 = this.myemploy.find(x=>x.Empid==this.empid);
+empid- parameter 
+x- object , x.Empid - property of that class
+-----------------------------------------
+
+node side
+---------------------------------------------
+npm install with package.json and server.js
+
+node server.js
+
+
+
+in app.module
+-----------------------------
+http module -import
+
+
+in serviec.ts
+--------------------------------
+
+import { Http } from  '@angular/http';
+import 'rxjs/add/operator/map'
+
+return this.http.get('http://localhost:8081/employee').map(response=>response.json());
+
+while calling the service to retrieve data
+-------------------------------
+this.empservice.getallemployees().subscribe(data=>this.myemploy=data);
