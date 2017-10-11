@@ -1,0 +1,79 @@
+pipes
+-------------------
+
+pipe.ts
+---------
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'searchnamepipe'
+})
+export class SearchnamepipePipe implements PipeTransform {
+
+  transform(value: any, item: any): any {
+    // check if item is undefined
+    if(item===undefined)return value;
+    console.log(item);
+    console.log(value);
+    // select from value by checking item
+    return value.filter(function(data){
+      console.log(data.name);
+      return data.name.toLowerCase().includes(item.toLowerCase());
+    })
+  }
+
+}
+
+
+app.component
+-----------------------------
+import { Component } from '@angular/core';
+import {SearchnamepipePipe} from './searchnamepipe.pipe'
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app';
+searchtext:any;
+  employee:any[]=[{id:3,name:"aswin"},
+  {id:4,name:"albince"},
+  {id:2,name:"sidique"}
+];
+}
+
+
+
+app.html
+-----------------
+<h1>sample app</h1>
+<form>
+  <div> 
+  <div>search by name</div>
+  <div> <input type="text" name="search" [(ngModel)]="searchtext" ></div>  
+   </div>
+<table *ngIf="employee">
+  <tr>
+    <th>id</th>
+    <th>name</th>
+  </tr>
+  <tr *ngFor="let item of employee | searchnamepipe:searchtext">
+  <td>{{item.id}}
+  </td>
+  <td>{{item.name}}
+  </td>
+  </tr>
+</table>
+</form>
+
+
+
+
+
+
+
+
+
+
